@@ -1,60 +1,20 @@
 ## Get Started
 
 ```sh
-npx create-app-starter my-app
-
-# If you want to create a pure js/css/html app include `vanilla` as the 4th argument
-npx create-app-starter my-app vanilla
-```
-
-or
-
-```sh
-git clone https://github.com/ItsLeeOwen/app-starter.git my-app
+git clone git@github.com:lucynaaleksandra/pig-game.git my-app
 
 cd my-app
-
-# If you want to create a pure js/css/html app include
-# checkout the vanilla branch
-git checkout vanilla
 
 npm install
 ```
 
-That's it.
 
-## Code Splitting
+PIG-GAME RULES:
 
-Add additional packages to package.json's "webpack.entry" config.
+- The game has 2 players, playing in rounds
+- In each turn, a player rolls a dice as manu times as he wishes. Each result gets added to his ROUND score
+- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
+- The player can choose to "hold", which means that his ROUND scorre gets added to his GLOBAL score. After that, it's the next player's turn.
+- The first player to reach 100 points on GLOBAL score wins the game
 
-```json
-"webpack": {
-  "entry": {
-    "index.html": "./src/index.html",
-    "index.js": "./src/index.js",
 
-    "login.html": "./src/login.html",
-    "login.js": "./src/login.js"
-  }
-}
-```
-
-## Environment Vars
-
-Add environment variables to your project, accessible on `process.env`. Example: `process.env.GREETING`.
-
-```json
-"webpack": {
-  "env": {
-    "GREETING": "cześć",
-    "GREETING_FROM_ENV": "$GREETING_FROM_ENV"
-  }
-}
-```
-
-Values prefixed with `$` will be assigned from your environment.
-Source environment variables from a `.env` file at the root of your project:
-
-```sh
-GREETING_FROM_ENV=alo
-```
