@@ -1,7 +1,5 @@
-import App from "app"
-import "./index.scss"
+import "./index.scss";
+// import "./pig-game-1.js";
+import "./pig-game-2.js";
+// import "./pig-game-3.js";
 
-console.log("index.js")
-
-const app = new App()
-app.greet("dzień dobry", "hello", process.env.GREETING)
