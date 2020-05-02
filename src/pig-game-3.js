@@ -14,16 +14,15 @@ Change the game to follow these rules:
 let scores = [0, 0],
 	globalScore = 0,
 	activePlayer = 0,
+	gamePlaying = true,
+	previousDiceRoll,
 	diceImg1 = document.querySelector("#dice-1"),
 	diceImg2 = document.querySelector("#dice-2"),
 	newButton = document.querySelector(".btn-new"),
 	rollDiceButton = document.querySelector(".btn-roll"),
 	holdButton = document.querySelector(".btn-hold"),
 	panel0 = document.querySelector(".player-0-panel"),
-	panel1 = document.querySelector(".player-1-panel"),
-	gamePlaying = true,
-	previousDiceRoll
-
+	panel1 = document.querySelector(".player-1-panel")
 
 init()
 
@@ -37,6 +36,7 @@ function init() {
 	scores = [0, 0]
 	activePlayer = 0
 	globalScore = 0
+	gamePlaying = true
 
 	diceImg1.style.display = "none"
 	diceImg2.style.display = "none"
@@ -51,11 +51,9 @@ function init() {
 	panel0.classList.add("active")
 	document.querySelector("#name-0").textContent = "Player 1"
 	document.querySelector("#name-1").textContent = "Player 2"
-	gamePlaying = true
 }
 
 function rollDice() {
-	// get random number
 	let dice1 = Math.floor(Math.random() * 6) + 1
 	let dice2 = Math.floor(Math.random() * 6) + 1
 	let currentScore = document.querySelector(`#current-${activePlayer}`)
@@ -74,7 +72,6 @@ function rollDice() {
 			globalScore += dice1 + dice2
 			currentScore.textContent = globalScore
 		} else {
-			// update next player and active class for active panel
 			nextPlayer()
 		}
 		previousDiceRoll = dice1
@@ -87,11 +84,7 @@ function onHold() {
 	let input = document.querySelector(".final-score").value
 	let winningScore
 
-	if (input) {
-		winningScore = input
-	} else {
-		winningScore = 100
-	}
+	input ? winningScore = input : winningScore = 100
 
 	if (gamePlaying) {
 		// add currentScore to the player's globalScore
@@ -102,12 +95,10 @@ function onHold() {
 		if (scores[activePlayer] >= winningScore) {
 			player.textContent = "Winner!"
 			activePanel.classList.add("winner")
-			// activePanel.classList.remove("active")
 			diceImg1.style.display = "none"
 			diceImg2.style.display = "none"
 			gamePlaying = false
 		} else {
-			// update activePlayer panel UI to next player
 			nextPlayer()
 		}
 	}
@@ -126,7 +117,6 @@ function nextPlayer() {
 		panel0.classList.add("active")
 	}
 	globalScore = 0
-
 	// when we roll 1, reset currentPlayer score to 0 and hide img
 	currentScore.textContent = 0
 	diceImg1.style.display = "none"

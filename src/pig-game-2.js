@@ -6,7 +6,7 @@
 - The first player to reach 100 points on GLOBAL score wins the game
 */
 
-/* 3 CHALLENGES
+/* 2 CHALLENGES
 Change the game to follow these rules:
 1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. (Hint: Always save the previous dice roll in a separate variable)
 2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a good oportunity to use google to figure this out.
@@ -15,14 +15,14 @@ Change the game to follow these rules:
 let scores = [0, 0],
 	globalScore = 0,
 	activePlayer = 0,
+	gamePlaying = true,
+	previousDiceRoll,
 	diceImg = document.querySelector(".dice"),
 	newButton = document.querySelector(".btn-new"),
 	rollDiceButton = document.querySelector(".btn-roll"),
 	holdButton = document.querySelector(".btn-hold"),
 	panel0 = document.querySelector(".player-0-panel"),
-	panel1 = document.querySelector(".player-1-panel"),
-	gamePlaying = true,
-	previousDiceRoll
+	panel1 = document.querySelector(".player-1-panel")
 
 
 init()
@@ -54,7 +54,6 @@ function init() {
 }
 
 function rollDice() {
-	// get random number
 	let dice = Math.floor(Math.random() * 6) + 1
 	let currentScore = document.querySelector(`#current-${activePlayer}`)
 	let globalScoreUI = document.querySelector(`#score-${activePlayer}`)
@@ -66,9 +65,8 @@ function rollDice() {
 		diceImg.style.display = "block"
 		diceImg.src = `/assets/dice-${dice}.png`
 
-		// update the global score if the rolled number was NOT a 1
-		// if rolled number is 6 two times in a row, the player looses all score
-
+		// update the global score IF the rolled number was NOT a 1
+		// the player looses all score IF rolled number is 6 two times in a row
 		if (dice === 6 && previousDiceRoll === 6) {
 			scores[activePlayer] = 0
 			globalScoreUI.textContent = "0"
@@ -77,7 +75,6 @@ function rollDice() {
 			globalScore += dice
 			currentScore.textContent = globalScore
 		} else {
-			// update next player and active class for active panel
 			nextPlayer()
 		}
 		previousDiceRoll = dice
@@ -90,11 +87,7 @@ function onHold() {
 	let input = document.querySelector(".final-score").value
 	let winningScore
 
-	if (input) {
-		winningScore = input
-	} else {
-		winningScore = 100
-	}
+	input ? winningScore = input : winningScore = 100
 
 	if (gamePlaying) {
 		// add currentScore to the player's globalScore

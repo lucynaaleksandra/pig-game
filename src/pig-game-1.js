@@ -9,13 +9,13 @@
 let scores = [0, 0],
 	globalScore = 0,
 	activePlayer = 0,
+	gamePlaying = true,
 	diceImg = document.querySelector(".dice"),
 	newButton = document.querySelector(".btn-new"),
 	rollDiceButton = document.querySelector(".btn-roll"),
 	holdButton = document.querySelector(".btn-hold"),
 	panel0 = document.querySelector(".player-0-panel"),
-	panel1 = document.querySelector(".player-1-panel"),
-	gamePlaying = true
+	panel1 = document.querySelector(".player-1-panel")
 
 
 init()
@@ -47,7 +47,6 @@ function init() {
 }
 
 function rollDice() {
-	// get random number
 	let dice = Math.floor(Math.random() * 6) + 1
 	let currentScore = document.querySelector(`#current-${activePlayer}`)
 
@@ -83,11 +82,9 @@ function onHold() {
 		if (scores[activePlayer] >= 100) {
 			player.textContent = "Winner!"
 			activePanel.classList.add("winner")
-			// activePanel.classList.remove("active")
 			diceImg.style.display = "none"
 			gamePlaying = false
 		} else {
-			// update activePlayer panel UI to next player
 			nextPlayer()
 		}
 	}
