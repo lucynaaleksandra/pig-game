@@ -1,9 +1,7 @@
 ## Get Started
 
 ```sh
-git clone git@github.com:lucynaaleksandra/pig-game.git my-app
-
-cd my-app
+git clone git@github.com:lucynaaleksandra/pig-game.git
 
 npm install
 ```
